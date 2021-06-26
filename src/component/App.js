@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "./AppRouter";
 import { authService } from "fBase";
+import { Container } from '@material-ui/core';
 
 function App() {
   const [init, setInit] = useState(false);
@@ -17,11 +18,11 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Container maxWidth="xs" style={{ display: 'flex', justifyContent: 'center' }}>
       {init ? 
         <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> 
         : "Initializing..."}
-    </>
+    </Container>
   );
 }
 

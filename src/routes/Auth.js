@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { firebaseInstance, authService } from "fBase";
+import { Grid, CssBaseline, TextField, Button } from '@material-ui/core';
+import ChildCareIcon from '@material-ui/icons/ChildCare'; 
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -20,11 +23,7 @@ const Auth = () => {
     }
   };
 
-  const onClickSocial = async (e) => {
-    const {
-      target: { name },
-    } = e;
-
+  const onClickSocial = async (name) => {
     let provider;
 
     if (name === "google") {
@@ -55,38 +54,48 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <ChildCareIcon fontSize="large" />
+        <LocalAtmIcon fontSize="large" />
+        <ChildCareIcon fontSize="large" />
+      </Grid>
+      <CssBaseline />
+      <Grid item xs={12}>
+        <TextField
           name="email"
           type="text"
-          placeholder="Email"
+          label="Email address"
           required
           value={email}
           onChange={onChange}
         />
-        <input
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
           name="password"
           type="password"
-          placeholder="Password"
+          label="password"
           required
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value={newAccount ? "Create Account" : "Log in"} />
-      </form>
-      <span onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </span>
-      <div>
-        <button name="google" onClick={(e) => onClickSocial(e)}>
-          Continue with Google
-        </button>
-        <button name="github" onClick={(e) => onClickSocial(e)}>
-          Continue with Github
-        </button>
-      </div>
-    </div>
+      </Grid>
+      <Grid item xs={12}>
+        <Button variant="contained" color="primary" size="large">Sign In</Button>
+      </Grid>
+
+      {/* <Grid container xs={12} spacing={2}>
+        <Grid item xs>
+          <Button variant="contained" color="primary" size="large">{newAccount ? "Create Account" : "Log in"}</Button>
+          <Button variant="contained" color="primary" size="large">{newAccount ? "Sign In" : "Create Account"}</Button>
+        </Grid>
+      </Grid> */}
+
+      <Grid item xs={12}>
+        <Button variant="contained" size="large" onClick={() => onClickSocial('google')}>Continue with Google</Button>
+      </Grid>
+    </Grid>
   );
 };
 
