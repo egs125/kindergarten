@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "./AppRouter";
 import { authService } from "fBase";
-import { Container } from '@material-ui/core';
 
 function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const onClickLogoutBtn = () => {
+    try {
+      authService.signOut()
+        .then(() => {
+          setUserObj(null);
+          setIsLoggedIn(false);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj(user);
+        setIsLoggedIn(true);
       }
 
       setInit(true);
@@ -18,11 +31,11 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="xs" style={{ display: 'flex', justifyContent: 'center' }}>
+    <>
       {init ? 
-        <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> 
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} onClickLogoutBtn={onClickLogoutBtn} /> 
         : "Initializing..."}
-    </Container>
+    </>
   );
 }
 
