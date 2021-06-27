@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -100,7 +101,7 @@ export default function Navigation(props) {
 
   console.log(props);
 
-  const { onClickLogoutBtn } = props;
+  const { isLoggedIn, onClickLogoutBtn } = props;
   
   return (
     <div className={classes.root}>
@@ -152,15 +153,19 @@ export default function Navigation(props) {
           </ListItem>
           
         </List>
-        <Divider />
-        <List>
-          <div onClick={handleLogout}>
-            <ListItem button key="logout">
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary="로그아웃" />
-            </ListItem>
-          </div>
-        </List>
+        {isLoggedIn && (
+          <>
+            <Divider />
+            <List>
+              <div onClick={handleLogout}>
+                <ListItem button key="logout">
+                  <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                  <ListItemText primary="로그아웃" />
+                </ListItem>
+              </div>
+            </List>
+          </>
+        )}
       </Drawer>
       <main
         className={clsx(classes.content, {

@@ -10,22 +10,24 @@ import WishList from "routes/WishList";
 const AppRouter = ({ isLoggedIn, userObj, onClickLogoutBtn }) => (
   <div className="root-container">
     <Grid container>
-      <Navigation onClickLogoutBtn={onClickLogoutBtn} />
+      <Router>
 
-      <Grid item xs={12}>
-        <Router>
+        <Route render={props => (<Navigation isLoggedIn={isLoggedIn} onClickLogoutBtn={onClickLogoutBtn} {...props} />)} />
+        
+        <Grid item xs={12}>
           <Switch>
-            {isLoggedIn ? (
-              <>
-                <Route exact path="/" render={props => (<Main userObj={userObj} {...props} />)} />
-                <Route exact path="/wishlist" render={props => (<WishList userObj={userObj} {...props} />)} />
-              </>
-            ) : (
-                <Route exact path="/" component={Auth} />
-            )}
+          {isLoggedIn ? (
+            <>
+              <Route exact path="/" render={props => (<Main userObj={userObj} {...props} />)} />
+              <Route exact path="/wishlist" render={props => (<WishList userObj={userObj} {...props} />)} />
+            </>
+          ) : (
+              <Route exact path="/" component={Auth} />
+          )}
           </Switch>
-        </Router>
-      </Grid>
+        </Grid>
+        
+      </Router>
     </Grid>
   </div>
 );
