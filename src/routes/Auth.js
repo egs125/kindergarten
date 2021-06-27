@@ -7,9 +7,9 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
-  const [error, setError] = useState("");
-  const toggleAccount = () => setNewAccount((prev) => !prev);
+  // const [newAccount, setNewAccount] = useState(true);
+  // const [error, setError] = useState("");
+  // const toggleAccount = () => setNewAccount((prev) => !prev);
 
   const onChange = (e) => {
     const {
@@ -35,23 +35,36 @@ const Auth = () => {
     await authService.signInWithPopup(provider);
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onClickSubmitBtn = () => {
 
+    if (email === '' || password === '') {
+      return false;
+    }
+    
+    try {
+      authService.signInWithEmailAndPassword(email, password);
+    } catch (e) {
+      console.log(e);
+    }
+    /*
     try {
       let data;
       if (newAccount) {
+        authService.createUserWithEmailAndPassword(email, password);
         data = await authService.createUserWithEmailAndPassword(
           email,
           password
         );
       } else {
+        authService.signInWithEmailAndPassword(email, password);
         data = await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
+      console.log(error.message);
       setError(error.message);
     }
-  };
+    */
+  }
 
   return (
     <Grid container spacing={3}>
@@ -82,7 +95,14 @@ const Auth = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" color="primary" size="large">Sign In</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={onClickSubmitBtn}
+        >
+          로그인
+        </Button>
       </Grid>
 
       {/* <Grid container xs={12} spacing={2}>
@@ -93,7 +113,7 @@ const Auth = () => {
       </Grid> */}
 
       <Grid item xs={12}>
-        <Button variant="contained" size="large" onClick={() => onClickSocial('google')}>Continue with Google</Button>
+        <Button variant="contained" size="large" onClick={() => onClickSocial('google')}>Google 계정으로 로그인</Button>
       </Grid>
     </Grid>
   );
