@@ -4,7 +4,7 @@ import { Grid, CssBaseline, TextField, Button } from '@material-ui/core';
 import ChildCareIcon from '@material-ui/icons/ChildCare'; 
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 
-const Auth = () => {
+const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [newAccount, setNewAccount] = useState(true);
@@ -40,7 +40,7 @@ const Auth = () => {
     if (email === '' || password === '') {
       return false;
     }
-    
+
     try {
       authService.signInWithEmailAndPassword(email, password);
     } catch (e) {
@@ -66,6 +66,8 @@ const Auth = () => {
     */
   }
 
+  console.log('Auth!!!!');
+  console.log(props);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>

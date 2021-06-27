@@ -30,6 +30,7 @@ function App() {
     });
   }, []);
 
+  console.log(isLoggedIn);
   return (
     <>
       {init ? 

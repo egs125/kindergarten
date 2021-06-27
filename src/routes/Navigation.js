@@ -18,6 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 const drawerWidth = 240;
 
@@ -78,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navigation({ onClickLogoutBtn }) {
+export default function Navigation(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -96,6 +98,10 @@ export default function Navigation({ onClickLogoutBtn }) {
     onClickLogoutBtn();
   }
 
+  console.log(props);
+
+  const { onClickLogoutBtn } = props;
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -136,19 +142,22 @@ export default function Navigation({ onClickLogoutBtn }) {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          <ListItem button key="wishlist">
+              <ListItemIcon><AddShoppingCartIcon /></ListItemIcon>
+              <ListItemText primary="장바구니" />
             </ListItem>
-          ))}
+          <ListItem button key="assets">
+              <ListItemIcon><AssessmentIcon /></ListItemIcon>
+              <ListItemText primary="자산" />
+          </ListItem>
+          
         </List>
         <Divider />
         <List>
           <div onClick={handleLogout}>
             <ListItem button key="logout">
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary="Log Out" />
+              <ListItemText primary="로그아웃" />
             </ListItem>
           </div>
         </List>
