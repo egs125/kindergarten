@@ -1,5 +1,5 @@
-import { moneyInfoStore } from './MoneyInfoStore';
-import { userInfoStore } from './UserInfoStore';
+import moneyInfoStore from './MoneyInfoStore';
+import userInfoStore from './UserInfoStore';
 
 const store = {
   moneyInfoStore,

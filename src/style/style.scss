@@ -3,6 +3,21 @@ body {
   height: 100%;
 }
 
+.progress-box {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .icon-box {
+    position: relative;
+    top: -10vh;
+  }
+
+}
+
 .root-container {
   display: flex;
   height: 100%;

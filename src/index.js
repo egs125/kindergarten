@@ -5,11 +5,11 @@ import { Provider } from "mobx-react";
 import store from './store';
 import './style/style.scss';
 
-console.log(store);
-
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider {...store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
