@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { dbService} from 'fBase';
 
 const Main = (props) => {
-  console.log('Main')
+
   return (<div>hi</div>)
 };
 
